@@ -141,6 +141,12 @@ const protect = async (req, res, next) => {
     }
 
     if (!token) {
+        // For multipart/form-data requests, consume body to prevent ECONNRESET
+        const contentType = req.headers['content-type'] || '';
+        if (contentType.includes('multipart/form-data')) {
+            req.resume();
+            await new Promise((resolve) => req.on('end', resolve));
+        }
         return res.status(401).json({
             success: false,
             message: 'Not authorized to access this route'
@@ -161,6 +167,12 @@ const protect = async (req, res, next) => {
         req.user = user;
         next();
     } catch (err) {
+        // For multipart/form-data requests, consume body to prevent ECONNRESET
+        const contentType = req.headers['content-type'] || '';
+        if (contentType.includes('multipart/form-data')) {
+            req.resume();
+            await new Promise((resolve) => req.on('end', resolve));
+        }
         return res.status(401).json({
             success: false,
             message: 'Not authorized to access this route'

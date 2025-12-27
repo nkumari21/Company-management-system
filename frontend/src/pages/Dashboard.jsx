@@ -137,8 +137,8 @@ const Dashboard = () => {
                       {new Date(attendance.date).toLocaleDateString()}
                     </TableCell>
                     <TableCell>
-                      {attendance.checkIn ? 
-                        new Date(attendance.checkIn).toLocaleTimeString() : 
+                      {attendance.loginTime ? 
+                        new Date(attendance.loginTime).toLocaleTimeString() : 
                         'Not checked in'
                       }
                     </TableCell>

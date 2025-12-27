@@ -15,6 +15,9 @@ import Attendance from './pages/Attendance';
 import Tasks from './pages/Tasks';
 import Salary from './pages/Salary';
 import PrivateRoute from './components/PrivateRoute';
+import Requests from './pages/Requests';
+import Notifications from './pages/Notifications';
+import Performance from './pages/Performance';
 
 const theme = createTheme({
   palette: {
@@ -47,6 +50,9 @@ function App() {
               <Route path="attendance" element={<Attendance />} />
               <Route path="tasks" element={<Tasks />} />
               <Route path="salary" element={<Salary />} />
+              <Route path="requests" element={<Requests />} />
+              <Route path="notifications" element={<Notifications />} />
+              <Route path="performance" element={<Performance />} />
             </Route>
           </Routes>
         </Router>

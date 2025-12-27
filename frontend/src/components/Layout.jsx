@@ -26,6 +26,9 @@ import {
   AttachMoney as MoneyIcon,
   Logout as LogoutIcon,
   AccountCircle,
+  Notifications as NotificationsIcon,
+  RequestQuote as RequestIcon,
+  TrendingUp as PerformanceIcon,
 } from '@mui/icons-material';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -72,19 +75,28 @@ const Layout = () => {
         { text: 'Users', icon: <PeopleIcon />, path: '/users' },
         { text: 'Attendance', icon: <CalendarIcon />, path: '/attendance' },
         { text: 'Tasks', icon: <AssignmentIcon />, path: '/tasks' },
-        { text: 'Salary', icon: <MoneyIcon />, path: '/salary' }
+        { text: 'Salary', icon: <MoneyIcon />, path: '/salary' },
+        { text: 'Requests', icon: <RequestIcon />, path: '/requests' },
+        { text: 'Notifications', icon: <NotificationsIcon />, path: '/notifications' },
+        { text: 'Performance', icon: <PerformanceIcon />, path: '/performance' }
       );
     } else if (user?.role?.includes('_head')) {
       baseItems.push(
         { text: 'Team', icon: <PeopleIcon />, path: '/users' },
         { text: 'Attendance', icon: <CalendarIcon />, path: '/attendance' },
-        { text: 'Tasks', icon: <AssignmentIcon />, path: '/tasks' }
+        { text: 'Tasks', icon: <AssignmentIcon />, path: '/tasks' },
+        { text: 'Requests', icon: <RequestIcon />, path: '/requests' },
+        { text: 'Notifications', icon: <NotificationsIcon />, path: '/notifications' },
+        { text: 'Performance', icon: <PerformanceIcon />, path: '/performance' }
       );
     } else if (user?.role === 'employee') {
       baseItems.push(
         { text: 'Attendance', icon: <CalendarIcon />, path: '/attendance' },
         { text: 'Tasks', icon: <AssignmentIcon />, path: '/tasks' },
-        { text: 'Salary', icon: <MoneyIcon />, path: '/salary' }
+        { text: 'Salary', icon: <MoneyIcon />, path: '/salary' },
+        { text: 'Requests', icon: <RequestIcon />, path: '/requests' },
+        { text: 'Notifications', icon: <NotificationsIcon />, path: '/notifications' },
+        { text: 'Performance', icon: <PerformanceIcon />, path: '/performance' }
       );
     }
 

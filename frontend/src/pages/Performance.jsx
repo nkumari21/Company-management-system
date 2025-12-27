@@ -42,6 +42,34 @@ const Performance = () => {
     }
   }, [month, year, isEmployee]);
 
+  // Refresh performance when performance-updated event is dispatched
+  useEffect(() => {
+    const handlePerformanceUpdate = () => {
+      if (isEmployee) {
+        fetchMyPerformance();
+      } else {
+        fetchLeaderboard();
+      }
+    };
+
+    window.addEventListener('performance-updated', handlePerformanceUpdate);
+    
+    // Also refresh when window regains focus (user returns to tab)
+    const handleFocus = () => {
+      if (isEmployee) {
+        fetchMyPerformance();
+      } else {
+        fetchLeaderboard();
+      }
+    };
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('performance-updated', handlePerformanceUpdate);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [month, year, isEmployee]);
+
   const fetchMyPerformance = async () => {
     try {
       const res = await axios.get(`/api/performance/my-performance?month=${month}&year=${year}`);

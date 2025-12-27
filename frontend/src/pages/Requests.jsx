@@ -103,6 +103,9 @@ const Requests = () => {
       await axios.put(`/api/requests/${requestId}/approve`);
       toast.success('Request approved');
       fetchRequests();
+      
+      // Trigger performance refresh
+      window.dispatchEvent(new Event('performance-updated'));
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to approve request');
     }
@@ -114,6 +117,9 @@ const Requests = () => {
       await axios.put(`/api/requests/${requestId}/reject`, { reason: reason || '' });
       toast.success('Request rejected');
       fetchRequests();
+      
+      // Trigger performance refresh
+      window.dispatchEvent(new Event('performance-updated'));
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to reject request');
     }

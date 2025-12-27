@@ -162,6 +162,9 @@ const Tasks = () => {
       toast.success('Task completed successfully!');
       handleCloseCompleteDialog();
       fetchTasks();
+      
+      // Trigger performance refresh by dispatching custom event
+      window.dispatchEvent(new Event('performance-updated'));
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to complete task');
     } finally {

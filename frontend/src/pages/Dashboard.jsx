@@ -36,6 +36,25 @@ const Dashboard = () => {
     fetchDashboardData();
   }, []);
 
+  // Refresh dashboard when performance-updated event is dispatched or window regains focus
+  useEffect(() => {
+    const handlePerformanceUpdate = () => {
+      fetchDashboardData();
+    };
+
+    const handleFocus = () => {
+      fetchDashboardData();
+    };
+
+    window.addEventListener('performance-updated', handlePerformanceUpdate);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('performance-updated', handlePerformanceUpdate);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+
   const fetchDashboardData = async () => {
     try {
       const res = await axios.get('/api/dashboard');
